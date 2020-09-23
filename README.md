@@ -372,6 +372,7 @@ http://notes.test/api/notes/archived
             "title": "note1",
             "description": "First note",
             "user_id": 1,
+			"status": "archived",
             "created_at": "2020-09-23T11:16:23.000000Z"
         },
         {
@@ -379,6 +380,7 @@ http://notes.test/api/notes/archived
             "title": "note2",
             "description": "Second note",
             "user_id": 1,
+			"status": "archived",
             "created_at": "2020-09-23T11:17:11.000000Z"
         },
         {
@@ -386,6 +388,7 @@ http://notes.test/api/notes/archived
             "title": "archived note note",
             "description": "This is another note",
             "user_id": 1,
+			"status": "archived",
             "created_at": "2020-09-23T11:37:03.000000Z"
         }
     ]
