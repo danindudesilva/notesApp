@@ -365,6 +365,7 @@ http://notes.test/api/notes/archived
 ### RESPONSE:
 
 ```node
+
 {
     "data": [
         {
@@ -393,6 +394,7 @@ http://notes.test/api/notes/archived
         }
     ]
 }
+
 ```
 ## TECHNOLOGIES CHOSEN AND REASONS WHY
 
