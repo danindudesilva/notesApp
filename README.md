@@ -116,6 +116,9 @@ Once the dependencies have been installed, run the following command to generate
 php artisan key:generate
 ```
 
+Now you are ready to use the app. Navigate to http://notes.test using your favourite browser to view the app home page. If you have successfully configured the App, you will see the home page with the title 'Notes'
+
+Use Postman or any other REST client to access the below APIs to use the notesApp.
 
 #### Assumption: In this scenario, notes are assumed to have only simple strings.
 
