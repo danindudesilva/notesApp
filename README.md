@@ -74,7 +74,7 @@ databases:
     - notesdb
 	
 ```
-Please note that you will need to clone the it repo notesApp to: ~/Laravel-Projects (The folder path given in 'folders' in the Homestead.yaml file)
+Please note that you will need to clone the Git repository notesApp to: ~/Laravel-Projects (The folder path given in 'folders' in the Homestead.yaml file)
 
 * Hostname Resolution
 
@@ -90,9 +90,31 @@ Make sure the IP address listed is the one set in your Homestead.yaml file. Once
 http://notes.test
 ```
 
+## Setting up the project
+
+After cloning the git repository, you will nee to copy the contents of the .env.example file to a new file named .env in the notesApp folder
+
 ## Launching The Vagrant Box
 
-Once you have edited the Homestead.yaml to your liking, run the vagrant up command from your Homestead directory. Vagrant will boot the virtual machine and automatically configure your shared folders and Nginx sites.
+Once you have edited the Homestead.yaml to your liking, run the 'vagrant up' command on a terminal window from your Homestead directory. Vagrant will boot the virtual machine and automatically configure your shared folders and Nginx sites.
+
+After the vagrant machine is booted, ssh into your varant box. Run the following command in the terminal to ssh into the vagrant box.
+
+```node
+vagrant ssh
+```
+
+Once you have successfully logged into your vagrant box, you can navigate to ~/code/notesApp/ directory and run the following command to download and install the dependencies required for the app
+
+```node
+composer install
+```
+
+Once the dependencies have been installed, run the following command to generate the Application key
+
+```node
+php artisan key:generate
+```
 
 
 #### Assumption: In this scenario, notes are assumed to have only simple strings.
