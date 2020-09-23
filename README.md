@@ -4,6 +4,7 @@
 * laravel
 * homestead
 
+#BEFORE USING THE APP
 
 ## Installing Laravel Homestead
 
@@ -94,10 +95,7 @@ http://notes.test
 Once you have edited the Homestead.yaml to your liking, run the vagrant up command from your Homestead directory. Vagrant will boot the virtual machine and automatically configure your shared folders and Nginx sites.
 
 
-# Assumptions
-#### Notes contain only basic strings
-#### When a user wants to update a note which is already archived, the user wants to update the archived note as well
-#### When a user wants to delete a note which is already archived, the user wants to delete the archived note as well
+#### Assumption: In this scenario, notes are assumed to have only simple strings.
 
 # APIS
 
@@ -126,7 +124,7 @@ http://notes.test/api/register
     "data": {
             "id": 1,
             "name": "danindu",
-            "email": "danindu@test.com",
+            "email": "danindu@notes.test",
             "email_verified_at": null,
             "created_at": "2020-09-23T11:03:52.000000Z",
             "updated_at": "2020-09-23T11:03:52.000000Z"
@@ -156,12 +154,12 @@ http://notes.test/api/notes
 ```node
 {
     "data": {
-            "id": 1,
-            "name": "danindu",
-            "email": "danindu@test.com",
-            "email_verified_at": null,
-            "created_at": "2020-09-23T11:03:52.000000Z",
-            "updated_at": "2020-09-23T11:03:52.000000Z"
+        "title": "My note",
+        "description": "Note content",
+        "user_id": 1,
+        "status": "unarchived",
+        "created_at": "2020-09-23T13:16:18.000000Z",
+        "id": 9
     }
 }
 ```

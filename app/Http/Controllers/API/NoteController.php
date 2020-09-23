@@ -51,7 +51,7 @@ class NoteController extends Controller
 
         $note = Note::create($request->all() + ["status" => "unarchived"]);
 
-        return response()->json($note, 201);
+        return new NoteResource($note);
     }
 
     /**
