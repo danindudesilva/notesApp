@@ -1,61 +1,385 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# NotesApp for Thirdfort
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Dependencies
+* laravel
+* homestead
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installing Laravel Homestead
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Laravel Homestead is an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine. No more worrying about messing up your operating system! Vagrant boxes are completely disposable. If something goes wrong, you can destroy and re-create the box in minutes!
+Before launching your Homestead environment, you must install: 
+* Composer: https://getcomposer.org/download/
+* VirtualBox 6.x: https://www.virtualbox.org/wiki/Downloads
+* Vagrant: https://www.vagrantup.com/downloads.html
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Installing The Homestead Vagrant Box
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Once VirtualBox / VMware and Vagrant have been installed, you should add the laravel/homestead box to your Vagrant installation using the following command in your terminal
+```node
+vagrant box add laravel/homestead
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installing Homestead
 
-## Laravel Sponsors
+You may install Homestead by cloning the repository onto your host machine. Consider cloning the repository into a Homestead folder within your "home" directory, as the Homestead box will serve as the host to all of your Laravel projects:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+```node
+git clone https://github.com/laravel/homestead.git ~/Homestead
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+You should check out a tagged version of Homestead since the master branch may not always be stable. You can find the latest stable version on the GitHub Release Page. Alternatively, you may checkout the release branch which always contains the latest stable release:
 
-## Contributing
+```node
+cd ~/Homestead
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+git checkout release
+```
+Once you have cloned the Homestead repository, run the bash init.sh command from the Homestead directory to create the Homestead.yaml configuration file. The Homestead.yaml file will be placed in the Homestead directory:
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```node
+// Mac / Linux...
+bash init.sh
 
-## Security Vulnerabilities
+// Windows...
+init.bat
+```
+## Configuring Homestead
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* Setting Your Provider
 
-## License
+The provider key in your Homestead.yaml file indicates which Vagrant provider should be used
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```node
+provider: virtualbox
+```
+* Configuring Shared Folders
+
+The folders property of the Homestead.yaml file lists all of the folders you wish to share with your Homestead environment. As files within these folders are changed, they will be kept in sync between your local machine and the Homestead environment. You may configure as many shared folders as necessary:
+
+```node
+folders:
+    - map: ~/Laravel-Projects
+      to: /home/vagrant/code
+	  
+sites:
+    - map: notes.test
+      to: /home/vagrant/code/notesApp/public
+	  
+databases:
+    - notesdb
+	
+```
+Please note that you will need to clone the it repo notesApp to: ~/Laravel-Projects (The folder path given in 'folders' in the Homestead.yaml file)
+
+* Hostname Resolution
+
+Using automatic hostnames works best for "per project" installations of Homestead. If you host multiple sites on a single Homestead instance, you may add the "domains" for your web sites to the hosts file on your machine. The hosts file will redirect requests for your Homestead sites into your Homestead machine. On Windows, it is located at C:\Windows\System32\drivers\etc\hosts. The lines you add to this file will look like the following:
+
+```node
+192.168.10.10  notes.test
+```
+
+Make sure the IP address listed is the one set in your Homestead.yaml file. Once you have added the domain to your hosts file and launched the Vagrant box you will be able to access the site via your web browser:
+
+```node
+http://notes.test
+```
+
+## Launching The Vagrant Box
+
+Once you have edited the Homestead.yaml to your liking, run the vagrant up command from your Homestead directory. Vagrant will boot the virtual machine and automatically configure your shared folders and Nginx sites.
+
+
+# Assumptions
+#### Notes contain only basic strings
+#### When a user wants to update a note which is already archived, the user wants to update the archived note as well
+#### When a user wants to delete a note which is already archived, the user wants to delete the archived note as well
+
+# APIS
+
+## CREATE A USER
+
+### POST
+### url: 
+```node
+http://notes.test/api/register
+```
+
+### request body:
+
+```node
+{
+    "name":"danindu",
+    "email":"danindu@notes.test",
+    "password":"password"
+}
+```
+
+### RESPONSE:
+
+```node
+{
+    "data": {
+            "id": 1,
+            "name": "danindu",
+            "email": "danindu@test.com",
+            "email_verified_at": null,
+            "created_at": "2020-09-23T11:03:52.000000Z",
+            "updated_at": "2020-09-23T11:03:52.000000Z"
+    }
+}
+```
+## SAVE A NEW NOTE
+
+### POST
+### url: 
+```node
+http://notes.test/api/notes
+```
+
+### request body:
+
+```node
+{
+    "title":"note1",
+    "description":"First note",
+    "user_id":1
+}
+```
+
+### RESPONSE:
+
+```node
+{
+    "data": {
+            "id": 1,
+            "name": "danindu",
+            "email": "danindu@test.com",
+            "email_verified_at": null,
+            "created_at": "2020-09-23T11:03:52.000000Z",
+            "updated_at": "2020-09-23T11:03:52.000000Z"
+    }
+}
+```
+
+## UPDATE A PREVIOUSLY SAVED NOTE
+
+### PUT
+### url: 
+```node
+http://notes.test/api/notes/{id}
+```
+
+### request body:
+
+```node
+{
+    "title":"Updated title",
+    "description":"This note has been updated",
+    "user_id":1
+}
+```
+
+### RESPONSE:
+
+```node
+{
+    "data": {
+        "id": 1,
+        "title": "Updated title",
+        "description": "This note has been updated",
+        "user_id": 1,
+        "status": "unarchived",
+        "created_at": "2020-09-23T11:36:11.000000Z"
+    }
+}
+```
+## DELETE A SAVED NOTE
+
+### DELETE
+### url: 
+```node
+http://notes.test/api/notes/{id}
+```
+
+### request body:
+
+```node
+null
+```
+
+### RESPONSE:
+
+```node
+204, No content
+```
+
+## ARCHIVE A NOTE
+
+### PUT
+### url: 
+```node
+http://notes.test/api/notes/{id}/archive
+```
+
+### request body:
+
+```node
+null
+```
+
+### RESPONSE:
+
+```node
+{
+    "data": {
+        "id": 4,
+        "title": "Note title",
+        "description": "This is the note content",
+        "user_id": 1,
+        "status": "archived",
+        "created_at": "2020-09-23T11:36:11.000000Z"
+    }
+}
+```
+## UNARCHIVE A PREVIOUSLLY ARCHIVED NOTE
+
+### PUT
+### url: 
+```node
+http://notes.test/api/notes/{id}/unarchive
+```
+
+### request body:
+
+```node
+null
+```
+
+### RESPONSE:
+
+```node
+{
+    "data": {
+        "id": 4,
+        "title": "Updated title",
+        "description": "This note has been updated",
+        "user_id": 1,
+        "status": "unarchived",
+        "created_at": "2020-09-23T11:36:11.000000Z"
+    }
+}
+```
+
+## LIST SAVED NOTES THAT AREN'T ARCHIVED
+
+### GET
+### url: 
+```node
+http://notes.test/api/notes/unarchived
+```
+
+### RESPONSE:
+
+```node
+{
+    "data": [
+        {
+            "id": 3,
+            "title": "note3",
+            "description": "Third note",
+            "user_id": 1,
+            "created_at": "2020-09-23T11:22:39.000000Z",
+            "updated_at": "2020-09-23T11:22:39.000000Z"
+        },
+        {
+            "id": 4,
+            "title": "test note",
+            "description": "This is a note",
+            "user_id": 1,
+            "created_at": "2020-09-23T11:36:11.000000Z",
+            "updated_at": "2020-09-23T11:36:11.000000Z"
+        },
+        {
+            "id": 5,
+            "title": "Another note",
+            "description": "This is another note",
+            "user_id": 1,
+            "created_at": "2020-09-23T11:36:22.000000Z",
+            "updated_at": "2020-09-23T11:36:22.000000Z"
+        }
+    ]
+}
+```
+
+## LIST SAVED NOTES THAT ARE ARCHIVED
+
+### GET
+### url: 
+```node
+http://notes.test/api/notes/archived
+```
+
+### RESPONSE:
+
+```node
+{
+    "data": [
+        {
+            "id": 1,
+            "title": "note1",
+            "description": "First note",
+            "user_id": 1,
+            "created_at": "2020-09-23T11:16:23.000000Z",
+            "updated_at": "2020-09-23T11:28:03.000000Z"
+        },
+        {
+            "id": 2,
+            "title": "note2",
+            "description": "Second note",
+            "user_id": 1,
+            "created_at": "2020-09-23T11:17:11.000000Z",
+            "updated_at": "2020-09-23T11:37:42.000000Z"
+        },
+        {
+            "id": 6,
+            "title": "archived note note",
+            "description": "This is another note",
+            "user_id": 1,
+            "created_at": "2020-09-23T11:37:03.000000Z",
+            "updated_at": "2020-09-23T11:37:03.000000Z"
+        }
+    ]
+}
+```
+# Choice of technology
+
+* Laravel
+Easy to develop and implement
+Easily deployable
+
+* mysql
+to save notes and note status
+adding more fields to a scema is less time consuming
+
+# improvements
+
+* authentication
+
+an authentication layer can be added to authenticate the users before they access notes. Currently the user is identified by passing the user_id field in the request body.
+
+[Oauth 2.0 can be used for this]
+
+* Proper error handling and policies
+
+currently the app does not have proper method for error handling and does not implement policies for authorization or user management
+
+* support for large content in notes
+
+Currently note content is stored in a database field as is, but for larger content, there needs to be proper storage options
+db can be used to store the status for easier and faster accessing.
+
