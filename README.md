@@ -126,7 +126,7 @@ Now you are ready to use the app. Navigate to http://notes.test using your favou
 
 Use Postman or any other REST client to access the below APIs to use the notesApp.
 
-#### Assumption: In this scenario, notes are assumed to have only simple strings.
+#### Assumption: In this scenario, notes are assumed to have only simple strings. When the user updates or deletes notes, archived notes can also be updated or deleted
 
 # APIS
 
