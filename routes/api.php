@@ -28,7 +28,7 @@ Route::delete('/notes/{id}', 'API\NoteController@destroy'); //DELETE A SAVED NOT
 
 
 Route::put('/notes/{id}/archive', 'API\NoteController@archive');        //ARCHIVE A NOTE
-Route::put('/notes/{id}/unarchive', 'API\NoteController@unarchive');    //UNARCHIVE A PREVIOUSLLY ARCHIVED NOTE
+Route::put('/notes/{id}/unarchive', 'API\NoteController@unarchive');    //UNARCHIVE A PREVIOUSLY ARCHIVED NOTE
 
 Route::get('/notes/unarchived', 'API\NoteController@getUnarchived');    //LIST SAVED NOTES THAT AREN'T ARCHIVED
 Route::get('/notes/archived', 'API\NoteController@getArchived');        //LIST SAVED NOTES THAT ARE ARCHIVED

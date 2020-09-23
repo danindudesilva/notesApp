@@ -244,7 +244,7 @@ null
     }
 }
 ```
-## UNARCHIVE A PREVIOUSLLY ARCHIVED NOTE
+## UNARCHIVE A PREVIOUSLY ARCHIVED NOTE
 
 ### PUT
 ### url: 
@@ -287,28 +287,28 @@ http://notes.test/api/notes/unarchived
 {
     "data": [
         {
-            "id": 3,
-            "title": "note3",
-            "description": "Third note",
-            "user_id": 1,
-            "created_at": "2020-09-23T11:22:39.000000Z",
-            "updated_at": "2020-09-23T11:22:39.000000Z"
-        },
-        {
             "id": 4,
-            "title": "test note",
-            "description": "This is a note",
+            "title": "Updated title",
+            "description": "This note has been updated",
             "user_id": 1,
-            "created_at": "2020-09-23T11:36:11.000000Z",
-            "updated_at": "2020-09-23T11:36:11.000000Z"
+            "status": "unarchived",
+            "created_at": "2020-09-23T11:36:11.000000Z"
         },
         {
-            "id": 5,
-            "title": "Another note",
-            "description": "This is another note",
+            "id": 7,
+            "title": "new note",
+            "description": "This is a new note",
             "user_id": 1,
-            "created_at": "2020-09-23T11:36:22.000000Z",
-            "updated_at": "2020-09-23T11:36:22.000000Z"
+            "status": "unarchived",
+            "created_at": "2020-09-23T11:57:26.000000Z"
+        },
+        {
+            "id": 9,
+            "title": "My note",
+            "description": "Note content",
+            "user_id": 1,
+            "status": "unarchived",
+            "created_at": "2020-09-23T13:16:18.000000Z"
         }
     ]
 }
@@ -354,7 +354,7 @@ http://notes.test/api/notes/archived
     ]
 }
 ```
-# Choice of technology
+## TECHNOLOGIES CHOSEN AND REASONS WHY
 
 * Laravel
 Easy to develop and implement
@@ -364,9 +364,9 @@ Easily deployable
 to save notes and note status
 adding more fields to a scema is less time consuming
 
-# improvements
+## POSSIBLE IMPROVEMENTS
 
-* authentication
+* Authentication
 
 an authentication layer can be added to authenticate the users before they access notes. Currently the user is identified by passing the user_id field in the request body.
 
@@ -376,7 +376,7 @@ an authentication layer can be added to authenticate the users before they acces
 
 currently the app does not have proper method for error handling and does not implement policies for authorization or user management
 
-* support for large content in notes
+* Support for large content in notes
 
 Currently note content is stored in a database field as is, but for larger content, there needs to be proper storage options
 db can be used to store the status for easier and faster accessing.
