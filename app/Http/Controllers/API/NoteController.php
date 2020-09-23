@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNote;
 use App\Http\Resources\NoteCollection;
 use App\Http\Resources\NoteResource;
 use App\Note;
@@ -46,7 +47,7 @@ class NoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreNote $request)
     {
 
         $note = Note::create($request->all() + ["status" => "unarchived"]);

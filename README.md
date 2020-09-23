@@ -110,10 +110,16 @@ Once you have successfully logged into your vagrant box, you can navigate to ~/c
 composer install
 ```
 
-Once the dependencies have been installed, run the following command to generate the Application key
+Once the dependencies have been installed, run the following artisan command to generate the Application key
 
 ```node
 php artisan key:generate
+```
+
+One last step! Run the database migrtions using the following artisan command.
+
+```node
+php artisan migrate
 ```
 
 Now you are ready to use the app. Navigate to http://notes.test using your favourite browser to view the app home page. If you have successfully configured the App, you will see the home page with the title 'Notes'
@@ -132,13 +138,20 @@ Use Postman or any other REST client to access the below APIs to use the notesAp
 http://notes.test/api/register
 ```
 
+### request headers:
+
+```node
+Accept:application/json
+```
+
 ### request body:
 
 ```node
 {
     "name":"danindu",
     "email":"danindu@notes.test",
-    "password":"password"
+    "password":"password",
+	"password_confirmation":"password"
 }
 ```
 
@@ -149,10 +162,7 @@ http://notes.test/api/register
     "data": {
             "id": 1,
             "name": "danindu",
-            "email": "danindu@notes.test",
-            "email_verified_at": null,
-            "created_at": "2020-09-23T11:03:52.000000Z",
-            "updated_at": "2020-09-23T11:03:52.000000Z"
+            "email": "danindu@notes.test"
     }
 }
 ```
@@ -162,6 +172,12 @@ http://notes.test/api/register
 ### url: 
 ```node
 http://notes.test/api/notes
+```
+
+### request headers:
+
+```node
+Accept:application/json
 ```
 
 ### request body:
@@ -202,8 +218,7 @@ http://notes.test/api/notes/{id}
 ```node
 {
     "title":"Updated title",
-    "description":"This note has been updated",
-    "user_id":1
+    "description":"This note has been updated"
 }
 ```
 
@@ -357,24 +372,21 @@ http://notes.test/api/notes/archived
             "title": "note1",
             "description": "First note",
             "user_id": 1,
-            "created_at": "2020-09-23T11:16:23.000000Z",
-            "updated_at": "2020-09-23T11:28:03.000000Z"
+            "created_at": "2020-09-23T11:16:23.000000Z"
         },
         {
             "id": 2,
             "title": "note2",
             "description": "Second note",
             "user_id": 1,
-            "created_at": "2020-09-23T11:17:11.000000Z",
-            "updated_at": "2020-09-23T11:37:42.000000Z"
+            "created_at": "2020-09-23T11:17:11.000000Z"
         },
         {
             "id": 6,
             "title": "archived note note",
             "description": "This is another note",
             "user_id": 1,
-            "created_at": "2020-09-23T11:37:03.000000Z",
-            "updated_at": "2020-09-23T11:37:03.000000Z"
+            "created_at": "2020-09-23T11:37:03.000000Z"
         }
     ]
 }
@@ -382,24 +394,26 @@ http://notes.test/api/notes/archived
 ## TECHNOLOGIES CHOSEN AND REASONS WHY
 
 * Laravel
-Easy to develop and implement
-Easily deployable
 
-* mysql
-to save notes and note status
-adding more fields to a scema is less time consuming
+Easy to develop and implement
+Effective ORM and database layer
+Active and growing community that can provide quick support and answers
+
+
+* MySQL
+
+high performance 
+secure and reliable
 
 ## POSSIBLE IMPROVEMENTS
 
 * Authentication
 
-an authentication layer can be added to authenticate the users before they access notes. Currently the user is identified by passing the user_id field in the request body.
+an authentication layer can be added to authenticate the users before they access notes. Currently the user is identified by passing the user_id field in the request body. Oauth2 can be used for this
 
-[Oauth 2.0 can be used for this]
+* Using a seperate db to store the archived notes 
 
-* Proper error handling and policies
-
-currently the app does not have proper method for error handling and does not implement policies for authorization or user management
+currently the app does not have a separate database for archived notes. We can add another database to store archived notes after a certain period of time
 
 * Support for large content in notes
 
