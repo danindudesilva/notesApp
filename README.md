@@ -4,7 +4,7 @@
 * laravel
 * homestead
 
-#BEFORE USING THE APP
+# BEFORE USING THE APP
 
 ## Installing Laravel Homestead
 
