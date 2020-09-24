@@ -102,7 +102,7 @@ Accept:application/json
     "name":"danindu",
     "email":"danindu@notes.test",
     "password":"password",
-	"password_confirmation":"password"
+    "password_confirmation":"password"
 }
 ```
 
@@ -135,8 +135,8 @@ Accept:application/json
 
 ```node
 {
-    "title":"note1",
-    "description":"First note",
+    "title":"My note",
+    "description":"Note content",
     "user_id":1
 }
 ```
@@ -151,7 +151,7 @@ Accept:application/json
         "user_id": 1,
         "status": "unarchived",
         "created_at": "2020-09-23T13:16:18.000000Z",
-        "id": 9
+        "id": 1
     }
 }
 ```
@@ -194,6 +194,8 @@ Accept:application/json
     }
 }
 ```
+In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being updated. A more informative error message could be given once Authentication is implemented  
+
 ## DELETE A SAVED NOTE
 
 ### DELETE
@@ -221,6 +223,7 @@ Accept:application/json
 ```node
 204, No content
 ```
+In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being updated. A more informative error message could be given once Authentication is implemented
 
 ## ARCHIVE A NOTE
 
@@ -258,9 +261,12 @@ Accept:application/json
     }
 }
 ```
+In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being updated. A more informative error message could be given once Authentication is implemented
+
 ## UNARCHIVE A PREVIOUSLY ARCHIVED NOTE
 
 ### PUT
+
 ### url: 
 ```node
 http://notes.test/api/notes/{id}/unarchive
@@ -294,6 +300,8 @@ Accept:application/json
     }
 }
 ```
+
+In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being updated. A more informative error message could be given once Authentication is implemented
 
 ## LIST SAVED NOTES THAT AREN'T ARCHIVED
 
