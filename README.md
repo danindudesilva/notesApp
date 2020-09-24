@@ -2,129 +2,73 @@
 
 ## Dependencies
 * laravel
-* homestead
+* composer
 
-# BEFORE USING THE APP
+## BEFORE USING THE APP
 
-## Installing Laravel Homestead
+### 1. Download XAMPP or WAMPP Server
 
-Laravel Homestead is an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine. No more worrying about messing up your operating system! Vagrant boxes are completely disposable. If something goes wrong, you can destroy and re-create the box in minutes!
-Before launching your Homestead environment, you must install: 
-* Composer: https://getcomposer.org/download/
-* VirtualBox 6.x: https://www.virtualbox.org/wiki/Downloads
-* Vagrant: https://www.vagrantup.com/downloads.html
+XAMPP:	https://www.apachefriends.org/download.html
+WAMPP:	http://www.wampserver.com/en/#download-wrapper
 
+### 2. Download Composer from below link
 
-## Installing The Homestead Vagrant Box
+Composer: https://getcomposer.org/download/
 
-Once VirtualBox / VMware and Vagrant have been installed, you should add the laravel/homestead box to your Vagrant installation using the following command in your terminal
-```node
-vagrant box add laravel/homestead
-```
+### 3. Run the XAMPP (or WAMPP) server on your system, 
 
-## Installing Homestead
+### 4. Create the Database
 
-You may install Homestead by cloning the repository onto your host machine. Consider cloning the repository into a Homestead folder within your "home" directory, as the Homestead box will serve as the host to all of your Laravel projects:
+Open phpmyadmin, create a mysql database with the name 'notesdb', type 'utf8_general_ci', username 'homestead', and password 'secret'
 
+### 5. Pull the Laravel project from Git, or download and extract the Git reposiory.
 
 ```node
-git clone https://github.com/laravel/homestead.git ~/Homestead
+git pull https://github.com/danindudesilva/notesApp.git
 ```
 
-You should check out a tagged version of Homestead since the master branch may not always be stable. You can find the latest stable version on the GitHub Release Page. Alternatively, you may checkout the release branch which always contains the latest stable release:
+### 6. Rename .env.example file
+
+Open the downloaded Git repository, On the Laravel project package you can see the .env.example file. Rename this .env.example file to. .env 
+
+In this file you can see the database connection settings, check the following fields and verify whether they match wih the database configurations you made in step 4. If note, chane accordingly
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=notesdb
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+### 7. Open a command prompt or terminal window and cd to the root directory of your project.
 
 ```node
-cd ~/Homestead
-
-git checkout release
-```
-Once you have cloned the Homestead repository, run the bash init.sh command from the Homestead directory to create the Homestead.yaml configuration file. The Homestead.yaml file will be placed in the Homestead directory:
-
-
-```node
-// Mac / Linux...
-bash init.sh
-
-// Windows...
-init.bat
-```
-## Configuring Homestead
-
-* Setting Your Provider
-
-The provider key in your Homestead.yaml file indicates which Vagrant provider should be used
-
-```node
-provider: virtualbox
-```
-* Configuring Shared Folders
-
-The folders property of the Homestead.yaml file lists all of the folders you wish to share with your Homestead environment. As files within these folders are changed, they will be kept in sync between your local machine and the Homestead environment. You may configure as many shared folders as necessary:
-
-```node
-folders:
-    - map: ~/Laravel-Projects
-      to: /home/vagrant/code
-	  
-sites:
-    - map: notes.test
-      to: /home/vagrant/code/notesApp/public
-	  
-databases:
-    - notesdb
-	
-```
-Please note that you will need to clone the Git repository notesApp to: ~/Laravel-Projects (The folder path given in 'folders' in the Homestead.yaml file)
-
-* Hostname Resolution
-
-Using automatic hostnames works best for "per project" installations of Homestead. If you host multiple sites on a single Homestead instance, you may add the "domains" for your web sites to the hosts file on your machine. The hosts file will redirect requests for your Homestead sites into your Homestead machine. On Windows, it is located at C:\Windows\System32\drivers\etc\hosts. The lines you add to this file will look like the following:
-
-```node
-192.168.10.10  notes.test
+cd notesApp
 ```
 
-Make sure the IP address listed is the one set in your Homestead.yaml file. Once you have added the domain to your hosts file and launched the Vagrant box you will be able to access the site via your web browser:
-
-```node
-http://notes.test
-```
-
-## Setting up the project
-
-After cloning the git repository, you will nee to copy the contents of the .env.example file to a new file named .env in the notesApp folder
-
-## Launching The Vagrant Box
-
-Once you have edited the Homestead.yaml to your liking, run the 'vagrant up' command on a terminal window from your Homestead directory. Vagrant will boot the virtual machine and automatically configure your shared folders and Nginx sites.
-
-After the vagrant machine is booted, ssh into your varant box. Run the following command in the terminal to ssh into the vagrant box.
-
-```node
-vagrant ssh
-```
-
-Once you have successfully logged into your vagrant box, you can navigate to ~/code/notesApp/ directory and run the following command to download and install the dependencies required for the app
+### 8. Install the dependencies. Run:
 
 ```node
 composer install
 ```
 
-Once the dependencies have been installed, run the following artisan command to generate the Application key
+### 9. Generate Application keys. Run:
 
 ```node
 php artisan key:generate
 ```
 
-One last step! Run the database migrtions using the following artisan command.
+### 10. Run the database migrations. Run:
 
 ```node
 php artisan migrate
 ```
 
-Now you are ready to use the app. Navigate to http://notes.test using your favourite browser to view the app home page. If you have successfully configured the App, you will see the home page with the title 'Notes'
+### 11. Start the PHP server. Run:
 
-Use Postman or any other REST client to access the below APIs to use the notesApp.
+```node
+php artisan serve
+```
 
 #### Assumption: In this scenario, notes are assumed to have only simple strings. When the user updates or deletes notes, archived notes can also be updated or deleted
 
