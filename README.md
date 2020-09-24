@@ -223,7 +223,7 @@ Accept:application/json
 ```node
 204, No content
 ```
-In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being updated. A more informative error message could be given once Authentication is implemented
+In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being deleted. A more informative error message could be given once Authentication is implemented
 
 ## ARCHIVE A NOTE
 
@@ -261,7 +261,7 @@ Accept:application/json
     }
 }
 ```
-In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being updated. A more informative error message could be given once Authentication is implemented
+In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being archived. A more informative error message could be given once Authentication is implemented
 
 ## UNARCHIVE A PREVIOUSLY ARCHIVED NOTE
 
@@ -301,7 +301,7 @@ Accept:application/json
 }
 ```
 
-In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being updated. A more informative error message could be given once Authentication is implemented
+In the above API, you will receive a null '404' response if the note is not found, or if the given user_id in the request body does note match the user_id of the note being unarchived. A more informative error message could be given once Authentication is implemented
 
 ## LIST SAVED NOTES THAT AREN'T ARCHIVED
 
