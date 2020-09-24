@@ -21,7 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', 'API\UserController@store');
 Route::get('/users', 'API\UserController@index');
 
-Route::get('/notes', 'API\NoteController@index');
+Route::get('/notes/{user_id}/archived', 'API\NoteController@getArchived');        //LIST SAVED NOTES THAT ARE ARCHIVED
+Route::get('/notes/{user_id}/unarchived', 'API\NoteController@getUnarchived');    //LIST SAVED NOTES THAT AREN'T ARCHIVED
+
 Route::post('/notes', 'API\NoteController@store');          //SAVE A NEW NOTE
 Route::put('/notes/{id}', 'API\NoteController@update');     //UPDATE A PREVIOUSLY SAVED NOTE
 Route::delete('/notes/{id}', 'API\NoteController@destroy'); //DELETE A SAVED NOTE
@@ -30,5 +32,6 @@ Route::delete('/notes/{id}', 'API\NoteController@destroy'); //DELETE A SAVED NOT
 Route::put('/notes/{id}/archive', 'API\NoteController@archive');        //ARCHIVE A NOTE
 Route::put('/notes/{id}/unarchive', 'API\NoteController@unarchive');    //UNARCHIVE A PREVIOUSLY ARCHIVED NOTE
 
-Route::get('/notes/unarchived', 'API\NoteController@getUnarchived');    //LIST SAVED NOTES THAT AREN'T ARCHIVED
-Route::get('/notes/archived', 'API\NoteController@getArchived');        //LIST SAVED NOTES THAT ARE ARCHIVED
+Route::get('/notes', 'API\NoteController@index');                       //LIST ALL NOTES
+
+

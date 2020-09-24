@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNote;
+use App\Http\Requests\UpdateNote;
 use App\Http\Resources\NoteCollection;
 use App\Http\Resources\NoteResource;
 use App\Note;
@@ -21,9 +22,10 @@ class NoteController extends Controller
         return new NoteCollection(Note::all());
     }
 
-    public function getArchived()
+    public function getArchived($user_id)
     {
-        $note = Note::where('status', 'archived')->get();
+
+        $note = Note::where('user_id', $user_id)->where('status', 'archived')->get();
         if(empty($note)) {
             return response()->json(null, 404);
         }else {
@@ -31,9 +33,9 @@ class NoteController extends Controller
         }
     }
 
-    public function getUnarchived()
+    public function getUnarchived($user_id)
     {
-        $note = Note::where('status', 'unarchived')->get();
+        $note = Note::where('user_id', $user_id)->where('status', 'unarchived')->get();
         if(empty($note)) {
             return response()->json(null, 404);
         }else {
@@ -79,9 +81,9 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateNote $request, $id)
     {
-        $note = Note::find($id);
+        $note = Note::where('user_id', $request->user_id)->where('id', $id)->first();
         if(empty($note)){
             return response()->json(null, 404);
         }else {
@@ -91,9 +93,10 @@ class NoteController extends Controller
 
     }
 
-    public function archive($id)
+    public function archive(UpdateNote $request, $id)
     {
-        $note = Note::find($id);
+        $note = Note::where('user_id', $request->user_id)->where('id', $id)->first();
+
         if(empty($note)){
             return response()->json(null, 404);
         }else {
@@ -102,9 +105,10 @@ class NoteController extends Controller
         }
     }
 
-    public function unarchive($id)
+    public function unarchive(UpdateNote $request, $id)
     {
-        $note = Note::find($id);
+        $note = Note::where('user_id', $request->user_id)->where('id', $id)->first();
+
         if(empty($note)){
             return response()->json(null, 404);
         }else {
@@ -120,9 +124,9 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UpdateNote $request, $id)
     {
-        $note = Note::find($id);
+        $note = Note::where('user_id', $request->user_id)->where('id', $id)->first();
 
         if(empty($note)){
             return response()->json(null, 404);

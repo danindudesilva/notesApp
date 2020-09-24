@@ -24,7 +24,7 @@ class UpdateNote extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:100',
+            'title' => 'max:100',
             'description' => 'max:1500',
             'user_id' => 'required|exists:users,id',
         ];

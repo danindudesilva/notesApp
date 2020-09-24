@@ -32,7 +32,7 @@ git pull https://github.com/danindudesilva/notesApp.git
 
 Open the downloaded Git repository, On the Laravel project package you can see the .env.example file. Rename this .env.example file to. .env 
 
-In this file you can see the database connection settings, check the following fields and verify whether they match wih the database configurations you made in step 4. If note, chane accordingly
+In this file you can see the database connection settings, check the following fields and verify whether they match wih the database configurations you made in step 4. If not, chane accordingly
 
 ```node
 DB_CONNECTION=mysql
@@ -43,7 +43,7 @@ DB_USERNAME=homestead
 DB_PASSWORD=secret
 ````
 
-### 7. Open a command prompt or terminal window and cd to the root directory of your project.
+### 7. Open a command prompt or terminal window and cd into the root directory of your project.
 
 ```node
 cd notesApp
@@ -95,7 +95,7 @@ http://notes.test/api/register
 Accept:application/json
 ```
 
-### request body:
+### sample request body:
 
 ```node
 {
@@ -106,7 +106,7 @@ Accept:application/json
 }
 ```
 
-### RESPONSE:
+### SAMPLE RESPONSE:
 
 ```node
 {
@@ -131,7 +131,7 @@ http://notes.test/api/notes
 Accept:application/json
 ```
 
-### request body:
+### sample request body:
 
 ```node
 {
@@ -141,7 +141,7 @@ Accept:application/json
 }
 ```
 
-### RESPONSE:
+### SAMPLE RESPONSE:
 
 ```node
 {
@@ -164,16 +164,23 @@ Accept:application/json
 http://notes.test/api/notes/{id}
 ```
 
-### request body:
+### request headers:
+
+```node
+Accept:application/json
+```
+
+### sample request body:
 
 ```node
 {
     "title":"Updated title",
-    "description":"This note has been updated"
+    "description":"This note has been updated",
+    "user_id":1
 }
 ```
 
-### RESPONSE:
+### SAMPLE RESPONSE:
 
 ```node
 {
@@ -195,13 +202,21 @@ http://notes.test/api/notes/{id}
 http://notes.test/api/notes/{id}
 ```
 
-### request body:
+### request headers:
 
 ```node
-null
+Accept:application/json
 ```
 
-### RESPONSE:
+### sample request body:
+
+```node
+{
+    "user_id": 1
+}
+```
+
+### SAMPLE RESPONSE:
 
 ```node
 204, No content
@@ -215,13 +230,21 @@ null
 http://notes.test/api/notes/{id}/archive
 ```
 
-### request body:
+### request headers:
 
 ```node
-null
+Accept:application/json
 ```
 
-### RESPONSE:
+### sample request body:
+
+```node
+{
+    "user_id": 1
+}
+```
+
+### SAMPLE RESPONSE:
 
 ```node
 {
@@ -243,13 +266,21 @@ null
 http://notes.test/api/notes/{id}/unarchive
 ```
 
-### request body:
+### request headers:
 
 ```node
-null
+Accept:application/json
 ```
 
-### RESPONSE:
+### sample request body:
+
+```node
+{
+    "user_id": 1
+}
+```
+
+### SAMPLE RESPONSE:
 
 ```node
 {
@@ -269,10 +300,16 @@ null
 ### GET
 ### url: 
 ```node
-http://notes.test/api/notes/unarchived
+http://notes.test/api/notes/{user_id}/unarchived
 ```
 
-### RESPONSE:
+### request headers:
+
+```node
+Accept:application/json
+```
+
+### SAMPLE RESPONSE:
 
 ```node
 {
@@ -310,10 +347,16 @@ http://notes.test/api/notes/unarchived
 ### GET
 ### url: 
 ```node
-http://notes.test/api/notes/archived
+http://notes.test/api/notes/{user_id}/archived
 ```
 
-### RESPONSE:
+### request headers:
+
+```node
+Accept:application/json
+```
+
+### SAMPLE RESPONSE:
 
 ```node
 
@@ -347,6 +390,72 @@ http://notes.test/api/notes/archived
 }
 
 ```
+
+## LIST ALL SAVED NOTES OF ALL USERS
+
+### GET
+### url: 
+```node
+http://notes.test/api/notes/
+```
+
+### request headers:
+
+```node
+Accept:application/json
+```
+
+### SAMPLE RESPONSE
+
+```node
+{
+    "data": [
+        {
+            "id": 6,
+            "title": "archived note note",
+            "description": "This is another note",
+            "user_id": 1,
+            "status": "archived",
+            "created_at": "2020-09-23T11:37:03.000000Z"
+        },
+        {
+            "id": 7,
+            "title": "new note",
+            "description": "This is a new note",
+            "user_id": 1,
+            "status": "unarchived",
+            "created_at": "2020-09-23T11:57:26.000000Z"
+        },
+        {
+            "id": 9,
+            "title": "My note",
+            "description": "Note content",
+            "user_id": 1,
+            "status": "unarchived",
+            "created_at": "2020-09-23T13:16:18.000000Z"
+        },
+        {
+            "id": 11,
+            "title": "de silva",
+            "description": "email@email.com",
+            "user_id": 3,
+            "status": "unarchived",
+            "created_at": "2020-09-24T08:46:55.000000Z"
+        },
+        {
+            "id": 12,
+            "title": "note",
+            "description": "email@email.com",
+            "user_id": 4,
+            "status": "unarchived",
+            "created_at": "2020-09-24T08:47:07.000000Z"
+        }
+    ]
+}
+```
+
+The above API is given for testing purposes so that all notes and their properties can be viewed without accessing the db externally
+ 
 ## TECHNOLOGIES CHOSEN AND REASONS WHY
 
 * Laravel
