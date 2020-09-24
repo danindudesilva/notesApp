@@ -9,6 +9,7 @@
 ### 1. Download XAMPP or WAMPP Server
 
 XAMPP:	https://www.apachefriends.org/download.html
+
 WAMPP:	http://www.wampserver.com/en/#download-wrapper
 
 ### 2. Download Composer from below link
@@ -33,12 +34,14 @@ Open the downloaded Git repository, On the Laravel project package you can see t
 
 In this file you can see the database connection settings, check the following fields and verify whether they match wih the database configurations you made in step 4. If note, chane accordingly
 
+```node
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=notesdb
 DB_USERNAME=homestead
 DB_PASSWORD=secret
+````
 
 ### 7. Open a command prompt or terminal window and cd to the root directory of your project.
 
@@ -69,6 +72,10 @@ php artisan migrate
 ```node
 php artisan serve
 ```
+
+Once you have successfully done that,navigate to https://localhost:8000 to view the home page of the app.
+
+Use Postman or any other REST client to access the below APIs to use the notesApp.
 
 #### Assumption: In this scenario, notes are assumed to have only simple strings. When the user updates or deletes notes, archived notes can also be updated or deleted
 
